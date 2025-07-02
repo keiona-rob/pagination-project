@@ -1,20 +1,32 @@
-
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Free Games</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-yellow-100">
-    <header>
-        <h1 class="text-3xl text-yellow-600 ">Dictionary</h1>
-    </header>
-    <main></main>
-    <footer></footer>
- <script src="script.js"></script>   
+<body class="bg-black">
+  <header>
+    <h1 class="text-emerald-400 text-5xl">Free Games</h1>
+  </header>
+  <main>
+    <!-- add view widths for screen size -->
+    <section class="flex flex-col"> 
+        <form
+        onsubmit="handleSubmitBreedSearch(event)"
+        class="flex flex-col">
+<label for="search-platform" class="text-emerald-500">Search by Platform</label>
+<input class="border border-emerald-300 text-emerald-100" type="text" name="search-breed" id="search-breed">
+<button type="submit" class="border border-emerald-300 bg-emerald-400 text-black">Search</button>
+        </form>
+
+    </section>
+    
+  </main>
+    
+  <footer></footer> 
+  <script src="script.js"></script> 
 </body>
 </html>
