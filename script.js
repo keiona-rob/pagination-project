@@ -1,12 +1,7 @@
 async function searchDogBreed(breed) {
     try {
-    //   const url = `https://www.freetogame.com/api/games?platform=${platform}&limit=10&page=1`
-      
-    //   const options = {
-    //     method: "GET", 
-        // headers: {'x-rapidapi-host': 'free-to-play-games-database.p.rapidapi.com'}
-      
-      const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`); 
+    
+       const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`); 
       if (!response.ok){
         throw new Error("Network error. Status:", response.status)
       } 
@@ -31,5 +26,32 @@ async function handleSubmitBreedSearch(event) {
     const breed = event.target["search-breed"].value;
     console.log(breed);
 
-    const data = searchDogBreed(breed);
+    const data = await searchDogBreed(breed);
+
+    renderImages(data)
 }
+
+
+function renderImages(dogData){
+    const picsContainer = document.getElementById("pics-container")
+
+ dogData.message.forEach(breed => {
+    const photoElement = document.createElement("div");
+    photoElement.innerHTML =  breed.message;
+    picsContainer.appendChild(photoElement);
+ });   
+}
+
+// .map((photo) => {
+
+//  return `
+
+//  <div>
+
+//  <img src="${photo.message}"/>
+
+//  </div>
+
+//  `;
+
+//  })
