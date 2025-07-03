@@ -1,57 +1,75 @@
-async function searchDogBreed(breed) {
-    try {
-    
-       const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`); 
-      if (!response.ok){
+const gallery = document.getElementById("gallery");
+
+let currentPage = 1
+
+
+
+ // Fetch 12 random images from Lorem Picsum
+
+ async function fetchImages() {
+
+ try {
+
+ const response = await fetch(
+
+ "https://picsum.photos/v2/list?page=1&limit=10"
+
+ );
+
+ if (!response.ok){
         throw new Error("Network error. Status:", response.status)
       } 
 
-      const data = await response.json()
+ const data = await response.json();
 
-      console.log(data)
+console.log(data)
 
-      return data;
-    } catch (error) {
-       console.log("ERROR fetching console data", error.message) 
-    }finally{
-      console.log("Finished fetching dog breed");  
-    }
+ gallery.innerHTML = data
+
+ .map((image) => {
+
+ return `
+
+ <div class="" >
+
+ <img class="rounded-lg w-full h-60 object-cover overflow-hidden hover:scale-105 transition duration-300 ease-in-out" src="${image.download_url}" alt="Random image by ${image.author}" />
+
+ </div>
+
+ `;
+
+ })
+
+ .join("");
+
+ } catch (error) {
+
+ console.error("Failed to fetch images:", error);
+
+ }
+
+ }
+
+
+
+ fetchImages();
+
+ renderPagination(data.numFound)
+
+ function renderPagination(numFound){
+    console.log(numFound)
+
     
-}
-// searchDogBreed('african')
+    const paginationContainer = document.getElementById("pagination-container");
+    
+    const prevButton = document.createElement('button')
+    prevButton.innerHTML = "Previous";
 
-async function handleSubmitBreedSearch(event) {
-    event.preventDefault();
+    const nextButton = document.createElement('button')
+    prevButton.innerHTML = "Next";
 
-    const breed = event.target["search-breed"].value;
-    console.log(breed);
-
-    const data = await searchDogBreed(breed);
-
-    renderImages(data)
-}
+    paginationContainer.appendChild(prevButton);
+    paginationContainer.appendChild(nextButton);
 
 
-function renderImages(dogData){
-    const picsContainer = document.getElementById("pics-container")
-
- dogData.message.forEach(breed => {
-    const photoElement = document.createElement("div");
-    photoElement.innerHTML =  breed.message;
-    picsContainer.appendChild(photoElement);
- });   
-}
-
-// .map((photo) => {
-
-//  return `
-
-//  <div>
-
-//  <img src="${photo.message}"/>
-
-//  </div>
-
-//  `;
-
-//  })
+ }
