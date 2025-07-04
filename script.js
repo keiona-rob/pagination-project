@@ -1,18 +1,22 @@
+const state = {
+    currentPage: 1,
+}
+
 const gallery = document.getElementById("gallery");
 
-let currentPage = 1
+// let currentPage = 1
 
 
 
  // Fetch 12 random images from Lorem Picsum
 
- async function fetchImages() {
+ async function fetchImages(page) {
 
  try {
 
  const response = await fetch(
 
- "https://picsum.photos/v2/list?page=1&limit=10"
+ `https://picsum.photos/v2/list?page=${page}&limit=10`
 
  );
 
@@ -48,28 +52,36 @@ console.log(data)
 
  }
 
- }
+ 
+}
 
 
 
- fetchImages();
+//  fetchImages(1);
 
- renderPagination(data.numFound)
+//  renderPagination(data.numFound)
 
- function renderPagination(numFound){
-    console.log(numFound)
+// //  whats data.numFound?
+
+//  function renderPagination(numFound){
+//     console.log(numFound)
 
     
-    const paginationContainer = document.getElementById("pagination-container");
+//     const paginationContainer = document.getElementById("pagination-container");
+//     // 6/25 18:00
     
-    const prevButton = document.createElement('button')
-    prevButton.innerHTML = "Previous";
+    const prevButton = document.getElementById("prevButton");
 
-    const nextButton = document.createElement('button')
-    prevButton.innerHTML = "Next";
+    const nextButton = document.getElementById("nextButton");
 
-    paginationContainer.appendChild(prevButton);
-    paginationContainer.appendChild(nextButton);
+    
+
+// 28
+// prevButton.addEventListener(click,event)
+ nextButton.onclick = async () => {
+    state.currentPage++
+     fetchImages(state.currentPage);
+ }   
 
 
- }
+fetchImages(state.currentPage)
