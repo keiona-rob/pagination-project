@@ -81,7 +81,11 @@ console.log(data)
  nextButton.onclick = async () => {
     state.currentPage++
      fetchImages(state.currentPage);
- }   
+ } 
+  prevButton.onclick = async () => {
+    state.currentPage--
+     fetchImages(state.currentPage);
+ }    
 
 
 fetchImages(state.currentPage)
