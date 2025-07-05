@@ -1,10 +1,10 @@
 const state = {
     currentPage: 1,
+//  isRateLimit = false   
 }
-
+// Rate limiting controls the rate at which users can access a service by limiting the number of allowed requests within a specified period
 const gallery = document.getElementById("gallery");
 
-// let currentPage = 1
 
 
 
@@ -55,20 +55,6 @@ console.log(data)
  
 }
 
-
-
-//  fetchImages(1);
-
-//  renderPagination(data.numFound)
-
-// //  whats data.numFound?
-
-//  function renderPagination(numFound){
-//     console.log(numFound)
-
-    
-//     const paginationContainer = document.getElementById("pagination-container");
-//     // 6/25 18:00
     
     const prevButton = document.getElementById("prevButton");
 
@@ -77,7 +63,6 @@ console.log(data)
     
 
 // 28
-// prevButton.addEventListener(click,event)
  nextButton.onclick = async () => {
     state.currentPage++
      fetchImages(state.currentPage);
@@ -87,5 +72,21 @@ console.log(data)
      fetchImages(state.currentPage);
  }    
 
+// const data = await fetchImages(state.currentPage)
+//  fetchImages(state.currentPage)
 
-fetchImages(state.currentPage)
+function renderPosts(posts) {
+
+if (state.isRateLimit === false) {
+    const data = fetchImages(state.currentPage);
+} else {
+    alert("Rate limit exceeded. Please wait.");
+    return;
+  }
+renderPosts(posts)
+  setTimeout(() => (state.isRateLimit = false), 2000);
+ }
+
+ fetchImages(state.currentPage)
+// // add rate limit
+// fetchImages(state.currentPage)
