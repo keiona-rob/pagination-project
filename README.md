@@ -1,3 +1,3 @@
-#Games Search
+#Photo Gallery
 
--User can search free games by platform
+-User can browse photos with previous and next buttons
